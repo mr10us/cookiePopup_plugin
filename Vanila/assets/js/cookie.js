@@ -174,14 +174,21 @@ document.addEventListener("DOMContentLoaded", () => {
     updateGTAG();
   };
 
+  // Initial event listener
+  const abortController = new AbortController();
+  if (window.matchMedia("(max-width: 640px)").matches) {
+    watchForScroll(abortController);
+  }
+
   const observer = new MutationObserver((elements) => {
     elements.forEach((element) => {
-      const abortController = new AbortController();
-      if (window.matchMedia("(max-width: 640px)").matches || element.attributeName === "class") {
+      if (
+        window.matchMedia("(max-width: 640px)").matches ||
+        element.attributeName === "class"
+      ) {
         if (window.matchMedia("(max-width: 640px)").matches) {
           watchForScroll(abortController);
-        }
-        else if (element.target.classList.contains("maximize")) {
+        } else if (element.target.classList.contains("maximize")) {
           watchForScroll(abortController);
         } else {
           abortController.abort("removed event handler");
