@@ -1,8 +1,6 @@
 // Watches if cookie body was scrolled
-function watchForScroll() {
+function watchForScroll(controller) {
   const cookieBody = document.querySelector(".cookie-policy .cookie__body");
-
-  const controller = new AbortController();
 
   function handler() {
     const bodyFullHeight = cookieBody.scrollHeight; // Full height
@@ -178,19 +176,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const observer = new MutationObserver((elements) => {
     elements.forEach((element) => {
-      let abortController = null;
-
-      if (
-        element.attributeName &&
-        element.target.classList.contains("maximize")
-      ) {
-        abortController = watchForScroll();
-      } else {
-        abortController === null ? null : abortController.abort();
-
-        setTimeout(() => {
-          cookiePolicy.querySelector(".cookie__body").style.maskImage = "";
-        }, 100);
+      const abortController = new AbortController();
+      if (window.matchMedia("(max-width: 640px)").matches || element.attributeName === "class") {
+        if (window.matchMedia("(max-width: 640px)").matches) {
+          watchForScroll(abortController);
+        }
+        else if (element.target.classList.contains("maximize")) {
+          watchForScroll(abortController);
+        } else {
+          abortController.abort("removed event handler");
+          console.log(abortController);
+          setTimeout(() => {
+            cookiePolicy.querySelector(".cookie__body").style.maskImage = "";
+          }, 100);
+        }
       }
     });
   });
