@@ -67,6 +67,9 @@ button {
 .cookie-policy {
   --gap: 1rem;
 
+  display: flex;
+  flex-direction: column;
+
   position: fixed;
   bottom: 1rem;
   left: 50%;
@@ -80,6 +83,10 @@ button {
   z-index: 9999;
 
   letter-spacing: 0.2px;
+}
+
+.cookie-policy.maximize {
+  max-height: 90dvh;
 }
 
 .cookie-policy .cookie__header {
@@ -165,7 +172,7 @@ button {
 }
 
 .cookie-policy .cookie__body {
-  max-height: 70vh;
+  max-height: 60vh;
   padding: 20px 0;
 }
 
@@ -540,6 +547,9 @@ button {
   .cookie-policy .cookie__footer .cookie__button-primary {
     width: 100%;
     grid-row: 3;
+  }
+  .cookie-policy.maximize {
+    height: 100%;
   }
 }
 @media screen and (max-width: 480px) {
