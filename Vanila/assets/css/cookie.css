@@ -167,8 +167,15 @@ button {
 .cookie-policy .cookie__body {
   max-height: 70vh;
   padding: 20px 0;
+}
+
+.cookie-policy.maximize .cookie__body {
   mask-image: linear-gradient(0deg, transparent 0, var(--color-background) 15%);
-  -webkit-mask-image: linear-gradient(0deg, transparent 0, var(--color-background) 15%);
+  -webkit-mask-image: linear-gradient(
+    0deg,
+    transparent 0,
+    var(--color-background) 15%
+  );
 }
 .cookie-policy.maximize .cookie__body .cookie__body-description {
   display: none;
@@ -200,7 +207,7 @@ button {
   .cookie__body-details
   ul.cookie__body-details__widgets {
   display: grid;
-  grid-auto-flow: column;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 2rem;
 }
 .cookie-policy.maximize
@@ -222,7 +229,7 @@ button {
   .cookie__body
   .cookie__body-details
   ul.cookie__body-details__widgets
-  > li.active {
+  > li:has(label input:checked) {
   opacity: 1;
 }
 .cookie-policy.maximize
@@ -367,10 +374,7 @@ button {
   li {
   margin-left: 10px;
 }
-.cookie-policy.maximize
-  .cookie__body
-  .cookie__body-details
-  > ul:not(.cookie__body-details__widgets) {
+.cookie-policy.maximize .cookie__body .cookie__body-details > ul:last-child {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 40px;
@@ -379,7 +383,7 @@ button {
 .cookie-policy.maximize
   .cookie__body
   .cookie__body-details
-  ul:not(.cookie__body-details__widgets)
+  > ul:last-child
   > li {
   display: grid;
   grid-template-rows: subgrid;
@@ -391,7 +395,7 @@ button {
 .cookie-policy.maximize
   .cookie__body
   .cookie__body-details
-  ul:not(.cookie__body-details__widgets)
+  > ul:last-child
   > li
   > p {
   font-size: var(--text-sm);
@@ -401,7 +405,7 @@ button {
 .cookie-policy.maximize
   .cookie__body
   .cookie__body-details
-  ul:not(.cookie__body-details__widgets)
+  > ul:last-child
   > li
   > ul
   > li {
@@ -413,7 +417,7 @@ button {
 .cookie-policy.maximize
   .cookie__body
   .cookie__body-details
-  ul:not(.cookie__body-details__widgets)
+  > ul:last-child
   > li:last-child
   ul {
   list-style: disc;
@@ -421,7 +425,7 @@ button {
 .cookie-policy.maximize
   .cookie__body
   .cookie__body-details
-  ul:not(.cookie__body-details__widgets)
+  > ul:last-child
   > li:last-child
   ul
   > li {
@@ -432,7 +436,7 @@ button {
 .cookie-policy.maximize
   .cookie__body
   .cookie__body-details
-  ul:not(.cookie__body-details__widgets)
+  > ul:last-child
   > li
   > ul
   > li
@@ -509,4 +513,34 @@ button {
     color: var(--color-primary);
     stroke: var(--color-primary);
   }
+}
+
+@media screen and (max-width: 768px) {
+  .cookie-policy.maximize
+    .cookie__body
+    .cookie__body-details
+    ul.cookie__body-details__widgets {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media screen and (max-width: 640px) {
+  .cookie-policy .cookie__body > div {
+    flex-wrap: wrap;
+  }
+  .cookie-policy .cookie__body {
+    width: calc(100% - 2rem);
+  }
+  .cookie-policy .cookie__footer {
+    grid-template-columns: 1fr;
+  }
+  .cookie-policy .cookie__footer .cookie__button-with,
+  .cookie-policy .cookie__footer .cookie__button-ghost {
+    justify-self: auto;
+  }
+  .cookie-policy .cookie__footer .cookie__button-primary {
+    width: 100%;
+    grid-row: 3;
+  }
+}
+@media screen and (max-width: 480px) {
 }
