@@ -64,6 +64,9 @@ document.addEventListener("DOMContentLoaded", () => {
           this.userConsent.ad_personalization = "granted";
         }
       },
+      displayCookieApp() {
+        this.$el.style.animation = "showUp 0.5s ease-out forwards";
+      },
 
       toggleMaximize() {
         this.isMaximized = !this.isMaximized;
@@ -117,8 +120,14 @@ document.addEventListener("DOMContentLoaded", () => {
         app.unmount();
       },
     },
+    beforeCreate() {
+      if (document.cookie.match(/user-consent=([^;]+)/)?.[1]) {
+        cookiePolicy.remove();
+      }
+    },
     mounted() {
       this.setDefaultGTAG();
+      this.displayCookieApp();
 
       this.$refs.cookieBody.addEventListener("scroll", this.handleScroll);
     },
