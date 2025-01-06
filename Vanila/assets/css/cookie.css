@@ -70,15 +70,53 @@ button {
 
 /* ––––– VARS ––––– */
 
+/* ––––– COOKIE BUTTON ––––– */
+
+#cookie .floating-cookie {
+  --padding: 0.5rem;
+
+  position: fixed;
+  bottom: 1rem;
+  left: 1rem;
+  z-index: 9999;
+
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+
+  width: calc(3rem + 2 * var(--padding));
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+
+  cursor: pointer;
+  -webkit-transition: background-color 0.3s ease;
+  -o-transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease;
+}
+
+@media (hover:hover) {
+  #cookie .floating-cookie:hover {
+    background-color: var(--color-hover);
+  }
+}
+
+/* ––––– COOKIE BUTTON ––––– */
+
 /* ––––– COOKIE POLICY ––––– */
 
 .cookie-policy {
   --gap: 1rem;
 
   display: -webkit-box;
-
   display: -ms-flexbox;
-
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
@@ -746,5 +784,17 @@ button {
     opacity: 1;
     -webkit-transform: translateY(0) translateX(-50%);
     transform: translateY(0) translateX(-50%);
+  }
+}
+@keyframes hideDown {
+  from {
+    opacity: 1;
+    -webkit-transform: translateY(0) translateX(-50%);
+    transform: translateY(0) translateX(-50%);
+  }
+  to {
+    opacity: 0;
+    -webkit-transform: translateY(100px) translateX(-50%);
+    transform: translateY(100px) translateX(-50%);
   }
 }
